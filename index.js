@@ -24,9 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
        <p>${player.breed} </p>
        <p>${player.status}</p>
        <img src="${player.imageUrl}"></div>`;
-       playerContainer.appendChild(playerElement);
+        playerContainer.appendChild(playerElement);
       });
-      
     } catch (error) {
       console.error("Could not fetch resource", error);
     }
