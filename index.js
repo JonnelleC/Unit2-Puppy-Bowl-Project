@@ -31,4 +31,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
   getPlayers();
+
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+  });
 });
