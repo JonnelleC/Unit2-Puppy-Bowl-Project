@@ -29,44 +29,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
       console.error("Could not fetch resource", error);
     }
-    
   };
-  
- getPlayers();
 
+  getPlayers();
+
+  document
+    .querySelector("form")
+    .addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const breed = document.getElementById("breed").value;
+      const status = document.getElementById("status").value;
+      const teamId = document.getElementById("teamId").value;
+
+      const playerData = {
+        name,
+        breed,
+        status,
+        teamId,
+      };
+
+      try {
+        const response = await fetch(
+          "https://fsa-puppy-bowl.herokuapp.com/api/2406-FTB-ET-WEB-FT/players",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(playerData),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("HTTP error! status: " + response.status);
+        }
+        const result = await response.json();
+        alert("Player created successfully!");
+      } catch (error) {
+        console.error("Could not fetch resource", error);
+      }
+    });
 });
-
-//  document.getElementById('create-player-form').addEventListener('submit', async function(event) {
-//   event.preventDefault();
-
-//   const name = document.getElementById('name').value;
-//   const breed = document.getElementById('breed').value;
-//   const status = document.getElementById('status').value;
-//   const teamId = document.getElementById('teamId').value;
-
-//   const playerData = {
-//       name,
-//       breed,
-//       status,
-//       teamId
-//   };
-
-//   try {
-//       const response = await fetch('https://fsa-puppy-bowl.herokuapp.com/api/2406-FTB-ET-WEB-FT/players', {
-//           method: 'POST',
-//           headers: {
-//               'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(playerData)
-//       });
-
-//       if (!response.ok) {
-//           throw new Error('HTTP error! status: ' + response.status);
-//       }
-
-//       const result = await response.json();
-//       alert('Player created successfully!');
-
-//     };
-
-//   });
